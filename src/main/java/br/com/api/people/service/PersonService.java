@@ -21,8 +21,9 @@ public class PersonService {
     public Iterable<PersonModel> listar(){
       return pr.findAll();
     }
-
-    public ResponseEntity<?> cadastrar(PersonModel pm){
+    //Cadastrar ou alterar produtos
+    public ResponseEntity<?> cadastrarAlterar(PersonModel pm, String action){
+      
       if(pm.getCpf().equals("")){
         rm.setMensage("O CPF é Obrigatório!");
         return new ResponseEntity<ResponseModel>(rm,HttpStatus.BAD_REQUEST);        
@@ -30,7 +31,11 @@ public class PersonService {
         rm.setMensage("O email é obrigatório");
         return new ResponseEntity<ResponseModel>(rm,HttpStatus.BAD_REQUEST); 
       }else{
-        return new ResponseEntity<PersonModel>(pr.save(pm),HttpStatus.CREATED);
+        if(action.equals("cadastrar")){
+          return new ResponseEntity<PersonModel>(pr.save(pm),HttpStatus.CREATED);
+        }else{
+          return new ResponseEntity<PersonModel>(pr.save(pm),HttpStatus.OK);
+        }
       }
     }
 }
