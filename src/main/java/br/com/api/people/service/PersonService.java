@@ -38,4 +38,15 @@ public class PersonService {
         }
       }
     }
+
+    //remover pessoa
+
+    public ResponseEntity<ResponseModel> remover(long id){
+
+      pr.deleteById(id);
+
+      rm.setMensage("Pessoa Removida com sucesso");
+      return new ResponseEntity<ResponseModel>(rm, HttpStatus.OK);
+
+    }
 }
