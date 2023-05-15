@@ -1,4 +1,4 @@
-function Tabela({vetor}){
+function Tabela({vetor, selecionar}){
   return(
       <table className='table'>
           <thead>
@@ -23,7 +23,7 @@ function Tabela({vetor}){
                   <td>{obj.age}</td>
                   <td></td>
                   <td></td>
-                  <td><button className="btn btn-success">Selecionar</button></td>
+                  <td><button onClick={() => {selecionar(indice)}} className="btn btn-success">Selecionar</button></td>
                 </tr>
 
                 ))

@@ -12,7 +12,7 @@ function App() {
     cpf : '',
     age : ''
   }
-
+  // UseState
   const [btnCadastrar, setBtnCadastrar] = useState(true)
   const [pessoas, setPessoas] = useState([]);
   const [objPessoa, setObjPessoa] = useState(pessoa)
@@ -27,7 +27,7 @@ function App() {
   const paraDigitar = (e) => {
     setObjPessoa({...objPessoa, [e.target.name]:e.target.value});
   }
-  
+  //Cadastrar pessoa
   const cadastrar = () => {
     fetch("http://localhost:8080/cadastrar",{
       method:'post',
@@ -39,7 +39,6 @@ function App() {
     })
     .then(retorno => retorno.json())
     .then(retorno_convertido =>{
-
       if(retorno_convertido.mensagem !== undefined){
         alert(retorno_convertido.mensagem);        
       }else{
@@ -50,15 +49,23 @@ function App() {
     })
   }
 
+  //Limpar formulário
   const limpaFormulario = () => {
-    setObjPessoa(pessoa)
+    setObjPessoa(pessoa);
+    setBtnCadastrar(true);
   }
 
+  //Selecionar pessoa
+  const selecionarPessoa = (indice) => {
+    setObjPessoa(pessoas[indice]);
+    setBtnCadastrar(false);
+  }
 
+  //Retorno
   return (
     <div>      
-      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa}/>
-      <Tabela vetor={pessoas} />
+      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa} cancelar={limpaFormulario} />
+      <Tabela vetor={pessoas} selecionar={selecionarPessoa} />
     </div>
   );
 }
