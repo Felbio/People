@@ -25,10 +25,10 @@ public class PersonService {
     public ResponseEntity<?> cadastrarAlterar(PersonModel pm, String action){
       
       if(pm.getCpf().equals("")){
-        rm.setMensage("O CPF é Obrigatório!");
+        rm.setMensagem("O CPF é Obrigatório!");
         return new ResponseEntity<ResponseModel>(rm,HttpStatus.BAD_REQUEST);        
       }else if(pm.getEmail().equals("")){
-        rm.setMensage("O email é obrigatório");
+        rm.setMensagem("O email é obrigatório");
         return new ResponseEntity<ResponseModel>(rm,HttpStatus.BAD_REQUEST); 
       }else{
         if(action.equals("cadastrar")){
@@ -45,7 +45,7 @@ public class PersonService {
 
       pr.deleteById(id);
 
-      rm.setMensage("Pessoa Removida com sucesso");
+      rm.setMensagem("Pessoa Removida com sucesso");
       return new ResponseEntity<ResponseModel>(rm, HttpStatus.OK);
 
     }

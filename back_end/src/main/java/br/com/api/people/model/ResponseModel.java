@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 public class ResponseModel {
 
-  private String mensage;
+  private String mensagem;
   
 }

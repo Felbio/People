@@ -39,14 +39,25 @@ function App() {
     })
     .then(retorno => retorno.json())
     .then(retorno_convertido =>{
-      console.log(retorno_convertido);
+
+      if(retorno_convertido.mensagem !== undefined){
+        alert(retorno_convertido.mensagem);        
+      }else{
+        setPessoas([...pessoas, retorno_convertido]);
+        alert('Produto cadastrado com sucesso!');
+        limpaFormulario();
+      }
     })
+  }
+
+  const limpaFormulario = () => {
+    setObjPessoa(pessoa)
   }
 
 
   return (
     <div>      
-      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar}/>
+      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa}/>
       <Tabela vetor={pessoas} />
     </div>
   );
