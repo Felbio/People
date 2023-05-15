@@ -27,6 +27,7 @@ function App() {
   const paraDigitar = (e) => {
     setObjPessoa({...objPessoa, [e.target.name]:e.target.value});
   }
+
   //Cadastrar pessoa
   const cadastrar = () => {
     fetch("http://localhost:8080/cadastrar",{
@@ -48,6 +49,45 @@ function App() {
       }
     })
   }
+
+   //Alterar pessoa
+   const alterar = () => {
+    fetch("http://localhost:8080/alterar",{
+      method:'put',
+      body:JSON.stringify(objPessoa),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json'
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido =>{
+      if(retorno_convertido.mensagem !== undefined){
+        alert(retorno_convertido.mensagem);        
+      }else{
+        //Mensagem
+        alert('Produto alterado com sucesso!');
+
+         //copia do vetor pessoa
+      let vetorTemporario = [...pessoas];
+
+      //Índice
+      let indice = vetorTemporario.findIndex((p) =>{
+        return p.id === objPessoa.id;
+      });
+
+      //Alterar pessoa do vetorTemporário
+      vetorTemporario[indice] = objPessoa;
+
+      //atualizar o vetor de Pessoas
+      setPessoas(vetorTemporario);
+
+        //Limpar o formulário
+        limpaFormulario();
+      }
+    })
+  }
+
 
   //Remover
   const remover = () => {
@@ -98,7 +138,7 @@ function App() {
   //Retorno
   return (
     <div>      
-      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa} cancelar={limpaFormulario} remover={remover}/>
+      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa} cancelar={limpaFormulario} remover={remover} alterar={alterar}/>
       <Tabela vetor={pessoas} selecionar={selecionarPessoa} />
     </div>
   );
