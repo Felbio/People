@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -27,4 +29,8 @@ public class AddressModel {
   private String state;
   private Double latitude;
   private Double longitude; 
+
+  @ManyToOne
+  @JoinColumn(name = "personid")
+  private PersonModel person;
 }
