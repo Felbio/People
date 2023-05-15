@@ -5,19 +5,48 @@ import Tabela from './Tabela';
 
 function App() {
 
-  const [btnInserir, setBtnInserir] = useState(true)
-  const [pessoas, setPessoas] = useState([]);
+  const pessoa = {
+    id : 0,
+    name : '',
+    email : '',
+    cpf : '',
+    age : ''
+  }
 
+  const [btnCadastrar, setBtnCadastrar] = useState(true)
+  const [pessoas, setPessoas] = useState([]);
+  const [objPessoa, setObjPessoa] = useState(pessoa)
+
+  //UseEffect
   useEffect(()=>{
     fetch("http://localhost:8080/listar")
     .then(retorno => retorno.json())
     .then(retorno_convertido => setPessoas(retorno_convertido));
   },[])
 
+  const paraDigitar = (e) => {
+    setObjPessoa({...objPessoa, [e.target.name]:e.target.value});
+  }
+  
+  const cadastrar = () => {
+    fetch("http://localhost:8080/cadastrar",{
+      method:'post',
+      body:JSON.stringify(objPessoa),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json'
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido =>{
+      console.log(retorno_convertido);
+    })
+  }
+
 
   return (
     <div>      
-      <Formulario botao={btnInserir} />
+      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar}/>
       <Tabela vetor={pessoas} />
     </div>
   );

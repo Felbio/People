@@ -1,16 +1,16 @@
-function Formulario({botao}){
+function Formulario({botao, eventoTeclado, cadastrar}){
   return(
     <form>
-      <input type='text' placeholder='Nome' className='form-control'/>
-      <input type='text' placeholder='Email' className='form-control'/>
-      <input type='text' placeholder='CPF' className='form-control'/>
-      <input type='text' placeholder='Idade' className='form-control'/>
-      <input type='text' placeholder='Endereço' className='form-control'/>
+      <input type='text' onChange={eventoTeclado} name='nome' placeholder='Nome' className='form-control'/>
+      <input type='text' onChange={eventoTeclado} name='email' placeholder='Email' className='form-control'/>
+      <input type='text' onChange={eventoTeclado} name='cpf' placeholder='CPF' className='form-control'/>
+      <input type='text' onChange={eventoTeclado} name='idade' placeholder='Idade' className='form-control'/>
+      <input type='text' onChange={eventoTeclado} name='endereço' placeholder='Endereço' className='form-control'/>
 
       {
         botao
         ?
-        <input type='button' value='Cadastrar' className='btn btn-primary'/>
+        <input type='button' value='Cadastrar' onClick={cadastrar} className='btn btn-primary'/>
         :
         <div>
           <input type='button' value='Alterar'    className='btn btn-warning' />
