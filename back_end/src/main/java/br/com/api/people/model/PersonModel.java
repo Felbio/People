@@ -31,8 +31,8 @@ public class PersonModel {
   private String cpf;
   private Integer age;
 
-  @OneToMany(mappedBy = "person")
-  private List<AddressModel> address = new ArrayList<>();
-  // private Address address;
+  // @OneToMany(mappedBy = "person")
+  // private List<AddressModel> address = new ArrayList<>();
+  // // private Address address;
   
 }

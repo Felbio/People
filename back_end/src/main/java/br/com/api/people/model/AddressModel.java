@@ -30,7 +30,7 @@ public class AddressModel {
   private Double latitude;
   private Double longitude; 
 
-  @ManyToOne
-  @JoinColumn(name = "personid")
-  private PersonModel person;
+  // @ManyToOne
+  // @JoinColumn(name = "personid")
+  // private PersonModel person;
 }

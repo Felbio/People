@@ -1,4 +1,4 @@
-function Formulario(){
+function Formulario({botao}){
   return(
     <form>
       <input type='text' placeholder='Nome' className='form-control'/>
@@ -6,10 +6,18 @@ function Formulario(){
       <input type='text' placeholder='CPF' className='form-control'/>
       <input type='text' placeholder='Idade' className='form-control'/>
       <input type='text' placeholder='Endereço' className='form-control'/>
-      <input type='text' value='Cadastrar' className='btn btn-primary'/>
-      <input type='text' value='Alterar' className='btn btn-warning'/>
-      <input type='text' value='Remover' className='btn btn-danger'/>
-      <input type='text' value='Cancelar' className='btn btn-secondary'/>   
+
+      {
+        botao
+        ?
+        <input type='button' value='Cadastrar' className='btn btn-primary'/>
+        :
+        <div>
+          <input type='button' value='Alterar'    className='btn btn-warning' />
+          <input type='button' value='Remover'    className='btn btn-danger' />
+          <input type='button' value='Cancelar'   className='btn btn-secondary' /> 
+        </div>
+      }      
     </form>
   )
 }
