@@ -49,6 +49,40 @@ function App() {
     })
   }
 
+  //Remover
+  const remover = () => {
+    fetch("http://localhost:8080/remover/"+objPessoa.id,{
+      method:'delete',
+      
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json'
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido =>{
+      //Mensagem 
+      alert(retorno_convertido.mensagem);
+
+      //copia do vetor pessoa
+      let vetorTemporario = [...pessoas];
+
+      //Índice
+      let indice = vetorTemporario.findIndex((p) =>{
+        return p.id === objPessoa.id;
+      });
+
+      //Remover pessoa do vetorTemporário
+      vetorTemporario.splice(indice, 1);
+
+      //atualizar o vetor de Pessoas
+      setPessoas(vetorTemporario);
+
+      //Limpar formulário
+      limpaFormulario();
+    })
+  }
+
   //Limpar formulário
   const limpaFormulario = () => {
     setObjPessoa(pessoa);
@@ -64,7 +98,7 @@ function App() {
   //Retorno
   return (
     <div>      
-      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa} cancelar={limpaFormulario} />
+      <Formulario botao={btnCadastrar} eventoTeclado={paraDigitar} cadastrar={cadastrar} obj={objPessoa} cancelar={limpaFormulario} remover={remover}/>
       <Tabela vetor={pessoas} selecionar={selecionarPessoa} />
     </div>
   );
